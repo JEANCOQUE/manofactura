@@ -52,32 +52,32 @@
 
 <script>
 
-    let operario = prompt("Ingrese el nombre del operario:");
-    let produccion = [];
-    let continuar = "si";
+    let operario = prompt("Ingrese el nombre del operario:")
+    let produccion = []
+    let continuar = "si"
 
     while (continuar.toLowerCase() === "si") {
 
-        let producto = prompt("Ingrese el tipo de producto (A, B o C):");
-        let costoUnitario = 0;
+        let producto = prompt("Ingrese el tipo de producto (A, B o C):")
+        let costoUnitario = 0
 
         switch (producto.toUpperCase()) {
             case "A":
-                costoUnitario = 5000;
-                producto = "Componente A";
-                break;
+                costoUnitario = 5000
+                producto = "Componente A"
+                break
             case "B":
-                costoUnitario = 7000;
-                producto = "Componente B";
-                break;
+                costoUnitario = 7000
+                producto = "Componente B"
+                break
             case "C":
-                costoUnitario = 10000;
-                producto = "Componente C";
-                break;
+                costoUnitario = 10000
+                producto = "Componente C"
+                break
             default:
                 alert("Producto inválido, se asigna Componente A");
                 costoUnitario = 5000;
-                producto = "Componente A";
+                producto = "Componente A"
         }
 
         let piezas = parseInt(prompt("Ingrese piezas producidas hoy:"));
@@ -88,29 +88,29 @@
             costo: costoUnitario
         });
 
-        continuar = prompt("¿Registrar otro día? (si/no)");
+        continuar = prompt("¿Registrar otro día? (si/no)")
     }
 
-    let totalPiezas = 0;
-    let costoTotal = 0;
+    let totalPiezas = 0
+    let costoTotal = 0
 
     for (let i = 0; i < produccion.length; i++) {
         totalPiezas += produccion[i].piezas;
         costoTotal += produccion[i].piezas * produccion[i].costo;
     }
 
-    let rendimiento = "";
-    let color = "";
+    let rendimiento = ""
+    let color = ""
 
     if (totalPiezas < 50) {
         rendimiento = "Bajo rendimiento";
-        color = "red";
+        color = "red"
     } else if (totalPiezas <= 100) {
         rendimiento = "Rendimiento aceptable";
-        color = "orange";
+        color = "orange"
     } else {
         rendimiento = "Rendimiento excelente";
-        color = "green";
+        color = "green"
     }
 
     document.write(
@@ -130,7 +130,7 @@
             "<td>$" + produccion[i].costo + "</td>" +
             "<td>$" + costoDia + "</td>" +
             "</tr>"
-        );
+        )
     }
 
     document.write(
@@ -148,4 +148,5 @@
 </script>
 
 </body>
+
 </html>
