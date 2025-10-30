@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Control de Producción</title>
+
+    <style>
+        body {
+            background-color: #eeeeee;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        .contenedor {
+            width: 70%;
+            background: white;
+            margin: auto;
+            padding: 15px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .rendimiento {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Control de Producción</h1>
+
+<script>
+
+    let operario = prompt("Ingrese el nombre del operario:");
+    let produccion = [];
+    let continuar = "si";
+
+    while (continuar.toLowerCase() === "si") {
+
+        let producto = prompt("Ingrese el tipo de producto (A, B o C):");
+        let costoUnitario = 0;
+
+        switch (producto.toUpperCase()) {
+            case "A":
+                costoUnitario = 5000;
+                producto = "Componente A";
+                break;
+            case "B":
+                costoUnitario = 7000;
+                producto = "Componente B";
+                break;
+            case "C":
+                costoUnitario = 10000;
+                producto = "Componente C";
+                break;
+            default:
+                alert("Producto inválido, se asigna Componente A");
+                costoUnitario = 5000;
+                producto = "Componente A";
+        }
+
+        let piezas = parseInt(prompt("Ingrese piezas producidas hoy:"));
+
+        produccion.push({
+            producto: producto,
+            piezas: piezas,
+            costo: costoUnitario
+        });
+
+        continuar = prompt("¿Registrar otro día? (si/no)");
+    }
+
+    let totalPiezas = 0;
+    let costoTotal = 0;
+
+    for (let i = 0; i < produccion.length; i++) {
+        totalPiezas += produccion[i].piezas;
+        costoTotal += produccion[i].piezas * produccion[i].costo;
+    }
+
+    let rendimiento = "";
+    let color = "";
+
+    if (totalPiezas < 50) {
+        rendimiento = "Bajo rendimiento";
+        color = "red";
+    } else if (totalPiezas <= 100) {
+        rendimiento = "Rendimiento aceptable";
+        color = "orange";
+    } else {
+        rendimiento = "Rendimiento excelente";
+        color = "green";
+    }
+
+    document.write(
+        "<div class='contenedor'>" +
+        "<strong>Operario:</strong> " + operario + "<br><br>" +
+        "<table>" +
+        "<tr><th>Día</th><th>Producto</th><th>Piezas</th><th>Costo Unitario</th><th>Costo Total Día</th></tr>"
+    );
+
+    for (let i = 0; i < produccion.length; i++) {
+        let costoDia = produccion[i].piezas * produccion[i].costo;
+        document.write(
+            "<tr>" +
+            "<td>" + (i + 1) + "</td>" +
+            "<td>" + produccion[i].producto + "</td>" +
+            "<td>" + produccion[i].piezas + "</td>" +
+            "<td>$" + produccion[i].costo + "</td>" +
+            "<td>$" + costoDia + "</td>" +
+            "</tr>"
+        );
+    }
+
+    document.write(
+        "<tr>" +
+        "<th colspan='2'>Totales</th>" +
+        "<th>" + totalPiezas + "</th>" +
+        "<th></th>" +
+        "<th>$" + costoTotal + "</th>" +
+        "</tr>" +
+        "</table>" +
+        "<br><span class='rendimiento' style='color:" + color + "'>Rendimiento: " + rendimiento + "</span>" +
+        "</div>"
+    );
+
+</script>
+
+</body>
+</html>
